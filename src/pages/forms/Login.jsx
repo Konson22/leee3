@@ -2,6 +2,9 @@ import { useRef, useState } from "react";
 import { useGlobalApi } from "../../manager/ContextProvider";
 import axiosInstance from "../../hooks/useAxios";
 import { LoadingButton } from "../../components/Buttons";
+import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../config";
 
 export default function Login() {
   const { setShowForm, setProfile } = useGlobalApi();
@@ -78,13 +81,61 @@ export default function Login() {
           </button>
         )}
       </form>
-
+      <SocilaMediaAuth />
       <button
         className="w-full text-center mt-7"
         onClick={() => setShowForm("register")}
       >
         ليس لديك حساب؟ إنشاء حساب
       </button>
+    </div>
+  );
+}
+
+function SocilaMediaAuth({ cName = "" }) {
+  const { setProfile, setShowForm } = useGlobalApi();
+  const [message, setMessage] = useState("");
+
+  const GoogleAuthHandler = () => {
+    signInWithPopup(auth, new GoogleAuthProvider()).then(
+      (credential) => {
+        const user = {
+          name: credential.user.displayName,
+          email: credential.user.email,
+          userID: credential.user.uid,
+          avatar: credential.user.photoURL,
+        };
+        setProfile(user);
+        setShowForm(null);
+      },
+      (err) => {
+        console.dir(err);
+        setMessage(err?.code?.split("/")[1]);
+      }
+    );
+  };
+
+  return (
+    <div className={`text-center mt-8 ${cName}`}>
+      <h3 className="mb-3 font-thin text-xl">أو سجيل الدخول باستخدام</h3>
+      {message && message}
+      <div className="flex justify-evenly">
+        <button className="w-[40px] h-[40px] rounded-full flex items-center justify-center border bg-sky-600 text-white">
+          <FaFacebook className="text-xl" />
+        </button>
+        <button
+          className="w-[40px] h-[40px] rounded-full flex items-center justify-center border bg-red-600 text-white"
+          onClick={GoogleAuthHandler}
+        >
+          <FaGoogle className="text-2xl" />
+        </button>
+        <button
+          className="w-[40px] h-[40px] rounded-full flex items-center justify-center border bg-red-600 text-white"
+          onClick={GoogleAuthHandler}
+        >
+          <FaTwitter className="text-2xl" />
+        </button>
+      </div>
     </div>
   );
 }

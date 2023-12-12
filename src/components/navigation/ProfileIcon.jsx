@@ -14,7 +14,7 @@ export default function ProfileIcon({ cName }) {
     profile ? setIsOpen(!isOpen) : setShowForm("login");
   return (
     <div
-      className="relative flex items-center cursor-pointer md:ml-0 ml-5"
+      className="relative flex items-center cursor-pointer text-gray-600 md:ml-0 ml-5"
       onClick={toggleProfile}
     >
       <IconBox icon={<FiUser />} count={userOrders.length} cName={cName} />

@@ -33,8 +33,8 @@ export default function ItemCard({ item }) {
         </p>
         <div className="flex justify-between">
           <span className="flex items-center justify-end mb-3">
-            <span className="font-bold">{item.quantity}</span>
-            <span>حبات متبقية</span>
+            <span className="font-bold">{item.quantity}5</span>
+            <span> متبقية</span>
           </span>
           <span className="flex items-center justify-end mb-3">
             <span>ر.س</span>
@@ -45,10 +45,10 @@ export default function ItemCard({ item }) {
           <span className="text-rd p-3 text-sm mb-2 block">{message}</span>
         )}
         <div className="flex items-center justify-between h-7">
-          <div className="flex items-center border border-cl1 rounded overflow-hidden">
+          <div className="flex items-center">
             <div
               className="
-                text-xl border bg-cl1 text-white flex items-center justify-center h-6 w-6
+                text-xl bg-cl1 text-white flex items-center justify-center h-6 w-6 rounded
               "
               onClick={() => val !== 1 && setVal(val - 1)}
             >
@@ -56,7 +56,7 @@ export default function ItemCard({ item }) {
             </div>
             <div className="mx-2">{val}</div>
             <div
-              className="text-xl border bg-cl1 text-white flex items-center justify-center h-6 w-6 rounded"
+              className="text-xl bg-cl1 text-white flex items-center justify-center h-6 w-6 rounded"
               onClick={() => setVal(val + 1)}
             >
               +
@@ -66,8 +66,8 @@ export default function ItemCard({ item }) {
             className="h-full flex items-center border border-cl1 px-3 rounded -3"
             onClick={handleAddItem}
           >
-            <FiShoppingCart />
             <span>إضافة</span>
+            <FiShoppingCart />
           </div>
         </div>
       </div>

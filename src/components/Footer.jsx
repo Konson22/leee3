@@ -14,10 +14,10 @@ export default function Footer() {
     <footer className="footer text-white md:flex justify-between px-[8%] py-10">
       <div className="">
         <div className="mb-7">
-          <h3 className="text-xl text-right mb-3">Contact</h3>
+          <h3 className="text-xl text-right mb-3">الاشتراك</h3>
           <div className="h-[3rem] flex p-1 rounded bg-white">
             <button className="h-full flex items-center bg-rd text-white rounded px-4">
-              send
+              ارسل
               <FiMail className="ml-2" />
             </button>
             <input
@@ -26,7 +26,9 @@ export default function Footer() {
               placeholder="البريد الإلكتروني"
             />
           </div>
-          <p className="text-right">نقدم مجموعة متنوعة من الكعك</p>
+          <p className="text-right mt-2">
+            اشترك واحصل على تحديث المثيل حول منتجاتنا وعروضنا الخاصة
+          </p>
         </div>
         <div className="mb-7">
           <h3 className="text-xl text-right mb-3">بوابات الدفع الالكتروني</h3>
@@ -58,46 +60,44 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="">
-        <h3 className="text-right font-bold">Contact</h3>
-        <ul>
-          {mobileNavigationLinks.map((link) => (
-            <li className="text-right py-2">{link.text}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="">
-        <h3 className="text-xl">Contact</h3>
-      </div>
-      <div className="">
-        <h3 className="text-xl font-bold text-right">الاتصال والعنوان</h3>
-        <ul>
-          <li className="flex items-center justify-end my-2">
-            somewhare, near something
-            <span className="border p-2 rounded-full ml-2">
-              <FaMapMarkerAlt />
-            </span>
-          </li>
-          <li className="flex items-center justify-end my-2">
-            +966544024948
-            <span className="border p-2 rounded-full ml-2">
-              <FaPhoneAlt />
-            </span>
-          </li>
-          <li className="flex items-center justify-end my-2">
-            +966544024948
-            <span className="border p-2 rounded-full ml-2">
-              <FaWhatsapp />
-            </span>
-          </li>
-          <li className="flex items-center justify-end my-2">
-            info@leeethree.com
-            <span className="border p-2 rounded-full ml-2">
-              <FiMail />
-            </span>
-          </li>
-        </ul>
-        {/* <ul>
+      <div className="flex justify-between md:mt-0 mt-8">
+        <div className="">
+          <h3 className="text-right font-bold">روابط سريعة</h3>
+          <ul>
+            {mobileNavigationLinks.map((link) => (
+              <li className="text-right py-2">{link.text}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="">
+          <h3 className="text-xl font-bold text-right">الاتصال والعنوان</h3>
+          <ul>
+            <li className="flex items-center justify-end my-2">
+              somewhare, near something
+              <span className="border p-2 rounded-full ml-2">
+                <FaMapMarkerAlt />
+              </span>
+            </li>
+            <li className="flex items-center justify-end my-2">
+              +966544024948
+              <span className="border p-2 rounded-full ml-2">
+                <FaPhoneAlt />
+              </span>
+            </li>
+            <li className="flex items-center justify-end my-2">
+              +966544024948
+              <span className="border p-2 rounded-full ml-2">
+                <FaWhatsapp />
+              </span>
+            </li>
+            <li className="flex items-center justify-end my-2">
+              info@leeethree.com
+              <span className="border p-2 rounded-full ml-2">
+                <FiMail />
+              </span>
+            </li>
+          </ul>
+          {/* <ul>
           <li className="flex items-center my-2">
             <span className="border p-2 rounded-full mr-2">
               <FaMapMarkerAlt />
@@ -123,6 +123,7 @@ export default function Footer() {
             info@leeethree.com
           </li>
         </ul> */}
+        </div>
       </div>
     </footer>
   );

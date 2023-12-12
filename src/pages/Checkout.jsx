@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { timeSchedule } from "../assets/staticData";
 import axiosInstance from "../hooks/useAxios";
+import { Time } from "../components/formateTime";
 
 const variants = {
   initial: {
@@ -28,7 +29,7 @@ const variants = {
 export default function Checkout() {
   const [selectedTime, setSelectedTime] = useState(null);
   const [message, setMessage] = useState("");
-  const [successCode, setSuccessCode] = useState(null);
+  const [success, setSuccess] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [deliveryMethod, setDeliveryMethod] = useState("picking");
   const {
@@ -41,10 +42,15 @@ export default function Checkout() {
   } = useGlobalApi();
 
   const handleInput = (e) => {
-    const date = new Date();
-    const time = new Date(date.setMinutes(date.getMinutes() + parseInt(e)));
-    setSelectedTime(time);
-    setMessage({ time: "" });
+    if (e) {
+      const date = new Date();
+      const time = new Date(date.setMinutes(date.getMinutes() + parseInt(e)));
+      setSelectedTime(time);
+      setMessage({ time: "", successMessage: "" });
+    } else {
+      setMessage({ time: "الرجاء إختيار الزمن" });
+      setSelectedTime(null);
+    }
   };
 
   const handleCheckout = async () => {
@@ -65,7 +71,10 @@ export default function Checkout() {
         const results = await axiosInstance
           .post("/orders", requestBody)
           .then((res) => res);
-        setSuccessCode(results.data.code);
+        setSuccess({
+          code: results.data.code,
+          message: Time(results.data.collectionTime),
+        });
         clearSavedCartItem();
         setUserOrders((prev) => [...prev, results.data]);
       } catch (error) {}
@@ -91,13 +100,13 @@ export default function Checkout() {
     return (
       <div className="h-screen fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-50">
         <div className="bg-white rounded p-8">
-          {successCode ? (
+          {success ? (
             <div className="">
               <div className="flex items-center justify-end">
-                <span className="text-xl font-bold mr-2">{successCode}</span>-
+                <span className="text-xl font-bold mr-2">{success.code}</span>-
                 <span>رمز الطلب</span>
               </div>
-              <p className="text-right">شكرا طلبك سيكون جاهزا الساعة 5 مساء</p>
+              <p className="text-right">{success.message}</p>
               <div className="flex justify-end mt-4">
                 <button
                   className="px-5 py-2 rounded bg-cl1 text-white"
@@ -148,6 +157,7 @@ export default function Checkout() {
                 } cursor-pointer rounded-md drop-shadow-md bg-gray-50 w-full duration-300 border border-cl1`}
                 onChange={(e) => handleInput(e.target.value)}
               >
+                <option value="">إختيار الزمن</option>
                 {timeSchedule.map((time, index) => (
                   <option value={time.val} key={index}>
                     {time.text}

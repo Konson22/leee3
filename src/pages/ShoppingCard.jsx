@@ -15,6 +15,7 @@ export default function ShoppingCard() {
       setTotalPrice(tPrice);
     }
   }, [cartData]);
+
   return (
     <div className="md:px-[8%] px-3 my-5">
       {cartData.length > 0 ? (
@@ -72,39 +73,67 @@ function ItemsInCart({ cartData, removeItem, cName = "md:block hidden" }) {
             </th>
             <th className="md:w-[max-content] py-3 px-5">السعر </th>
             <th className="md:w-[max-content] py-3 px-5">الكمية</th>
-            <th className="py-3 px-5">منتجات</th>
+            <th colSpan={2} className="py-3 px-5">
+              منتجات
+            </th>
           </tr>
         </thead>
         <tbody>
           {cartData.map((item, index) => (
-            <tr key={index} className={`${index % 2 ? "bg-gray-50" : ""}`}>
-              <td className="py-3 px-5">
-                <div
-                  className="bg-rd text-white w-[max-content] cursor-pointer p-2"
-                  onClick={() => removeItem(item.productID)}
-                >
-                  <FiX />
-                </div>
-              </td>
-              <td className="py-3 px-5">{item.price * item.qty}</td>
-              <td className="md:block hidden py-3 px-5">{item.price}</td>
-              <td className="py-3 px-5">
-                <input className="w-14 h-8" type="number" value={item.qty} />
-              </td>
-              <td className="px-5 py-3 flex justify-end">
-                <div className="flex items-center">
-                  <span className="md:block hidden">{item.name}</span>
-                  <img
-                    className="h-10 w-10 ml-3"
-                    src={process.env.PUBLIC_URL + item.product_image}
-                    alt=""
-                  />
-                </div>
-              </td>
-            </tr>
+            <TableBody
+              index={index}
+              key={index}
+              item={item}
+              removeItem={removeItem}
+            />
           ))}
         </tbody>
       </table>
     </div>
+  );
+}
+
+function TableBody({ item, removeItem, index }) {
+  const [qty, setQty] = useState(1);
+
+  return (
+    <tr key={index} className={`${index % 2 ? "bg-gray-50" : ""}`}>
+      <td className="py-3 px-5">
+        <div
+          className="bg-rd text-white w-[max-content] cursor-pointer p-2"
+          onClick={() => removeItem(item.productID)}
+        >
+          <FiX />
+        </div>
+      </td>
+      <td className="py-3 px-5">{item.price * item.qty}</td>
+      <td className="md:block hidden py-3 px-5">{item.price}</td>
+      <td className="py-3">
+        <div className="flex items-center justify-end">
+          <span
+            className="bg-cl1 text-white px-2"
+            onClick={() => qty !== 1 && setQty(qty - 1)}
+          >
+            -
+          </span>
+          <span className="mx-1">{qty}</span>
+          <span
+            className="bg-cl1 text-white px-2"
+            onClick={() => setQty(qty + 1)}
+          >
+            +
+          </span>
+        </div>
+        {/* <input className="w-14 h-8" type="number" value={item.qty} /> */}
+      </td>
+      <td>{item.name}</td>
+      <td className="px-5 py-3 flex justify-end">
+        <img
+          className="h-10 w-10 ml-3"
+          src={process.env.REACT_APP_API + item.product_image}
+          alt=""
+        />
+      </td>
+    </tr>
   );
 }

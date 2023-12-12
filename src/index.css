@@ -44,7 +44,14 @@ img {
 
 .header-container {
   background-image: linear-gradient(rgba(124, 89, 80, 0.5), rgba(124, 89, 80, 0.51)),
-    url('./assets/images/offer.jpg');
+    url('./assets/images/pexels-meruyert-gonullu-6161672.jpg');
+  background-size: cover;
+  /* background-position: right; */
+}
+
+.header-text {
+  background-image: linear-gradient(rgba(124, 89, 80, 0.5), rgba(124, 89, 80, 0.51)),
+    url('./assets/images/conversation-hearts-4783767_640.jpg');
   background-size: cover;
   background-position: right;
 }
@@ -68,6 +75,11 @@ img {
     url('./assets/images/offer.jpg');
   background-size: cover;
   background-position: right;
+}
+
+
+.contact-from {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 60% 95%, 50% 100%, 40% 95%, 0 95%);
 }
 
 .promotion-container {

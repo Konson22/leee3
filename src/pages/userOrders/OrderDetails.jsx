@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../hooks/useAxios";
 import { useParams } from "react-router-dom";
+import { useGlobalApi } from "../../manager/ContextProvider";
 
 export default function OrderDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const [items, setItem] = useState([]);
   const { orderCode } = useParams();
   const [totalPrice, setTotalPrice] = useState(0.0);
+  const { profile } = useGlobalApi();
 
   useEffect(() => {
     const getOrder = async () => {
       setIsLoading(true);
       try {
         const results = await axiosInstance
-          .post("/orders/single", { orderCode })
+          .post("/orders/single", { orderCode: orderCode })
           .then((res) => res);
         setItem(results.data);
         if (results.data.length) {
@@ -28,8 +30,8 @@ export default function OrderDetails() {
         setIsLoading(false);
       }
     };
-    getOrder();
-  }, [orderCode]);
+    profile && getOrder();
+  }, [orderCode, profile]);
   return (
     <div className="bg-white p-3 m-4">
       {isLoading && "Loading..."}

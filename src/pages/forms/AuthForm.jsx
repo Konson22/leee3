@@ -17,20 +17,18 @@ export default function AuthForm() {
         </div>
         <div className="flex justify-between">
           <div
-            className={`flex-1 px-10 py-4 cursor-pointer ${
+            className={`flex-1 md:pr-10 pr-5 py-4 cursor-pointer border-b-4 ${
               showForm === "register"
-                ? "border-b-4 border-cl1"
-                : "border-b-2 border-cl1/20"
+                ? "border-cl1 text-cl1"
+                : "text-cl1/50 border-cl1/20"
             }`}
             onClick={() => setShowForm("register")}
           >
             <h4 className="text-right">إنشاء حساب جديد</h4>
           </div>
           <div
-            className={`flex-1 px-10 py-4 cursor-pointer border-b-2 ${
-              showForm === "login"
-                ? "border-b-4 border-cl1"
-                : "border-b-2 border-cl1/20"
+            className={`flex-1 md:pr-10 pr-5 py-4 cursor-pointer border-b-4 ${
+              showForm === "login" ? "border-cl1" : "border-cl1/20"
             }`}
             onClick={() => setShowForm("login")}
           >

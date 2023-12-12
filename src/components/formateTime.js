@@ -40,3 +40,19 @@ export function formateTime(t){
     }
     return{ bg, text }
 }
+
+export function Time(t){
+    const present = Date.now()
+    const romanianRevolution = new Date(t)
+
+    let dif;
+    let text;
+    dif = diffDates(romanianRevolution, present, "minutes")
+    if(dif < 60){
+        text = `${diffDates(romanianRevolution, present, "minutes")} شكرا طلبك سيكون جاهزا`
+            
+    }else{
+        text = `${diffDates(romanianRevolution, present, "hours")} شكرا طلبك سيكون جاهزا`
+    }
+    return text
+}

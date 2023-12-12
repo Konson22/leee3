@@ -141,12 +141,11 @@ export default function GlobalContextProvider({ children }) {
     if (cartData.length > 0) {
       const result = cartData.find((i) => i.productID === item.productID);
       if (result) {
-        respose = "Already Added";
-      } else {
-        const newCart = [...cartData, item];
-        setCartData(newCart);
-        saveToLocalStorage("candy-cart", newCart);
+        respose = "تمت الإضافة مرة أخرى";
       }
+      const newCart = [...cartData, item];
+      setCartData(newCart);
+      saveToLocalStorage("candy-cart", newCart);
     } else {
       setCartData([item]);
       localStorage.setItem("candy-cart", JSON.stringify([item]));
@@ -206,7 +205,7 @@ export default function GlobalContextProvider({ children }) {
 
 export const useGlobalApi = () => useContext(contextApi);
 
-const saveToLocalStorage = (name, data) => {
+export const saveToLocalStorage = (name, data) => {
   localStorage.setItem(name, JSON.stringify(data));
 };
 
