@@ -3,15 +3,33 @@ import Header from "./Header";
 import ProductSection from "./ProductSection";
 import ServiceSection from "./ServiceSection";
 import PickingOptionSection from "./PickingOptionSection";
+import TestimonailSection from "./TestimonailSection";
+import { FiShoppingBag } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function MainPage() {
   return (
     <div>
       <Header />
-
+      <div className="md:px-[20%] px-6 mt-8">
+        <p className="text-center">
+          استمتع بتجربة فريدة من نوعها عبر استكشاف مجموعتنا الرائعة من الحلوى
+          المختارة بعناية. تضم مجموعتنا مجموعة متنوعة من الحلوى الطرية، الحلوى
+          الحامضة، الشوكولاته اللذيذة .
+        </p>
+        <div className="flex">
+          <Link
+            className="flex items-center mx-auto mt-5 bg-rd text-white px-5 py-2 rounded"
+            to="/store"
+          >
+            ابدأ التسوق
+            <FiShoppingBag className="md:text-2xl ml-2" />
+          </Link>
+        </div>
+      </div>
       <ProductSection />
       {/* VISIT US SECTION */}
-      <div className="visit-use-section-container text-xl py-14 px-5 text-white text-center mb-8">
+      <div className="text-xl py-14 px-5 text-center mb-8">
         <p>
           في leee3، نفتخر بكوننا محطة الوجهة الأمثلة لعشاق الحلوى. نحن مكان يجمع
           بين التقاليد والابتكار، حيث يمكنكم الاستمتاع بأحدث صيحات عالم الحلوى
@@ -19,12 +37,8 @@ export default function MainPage() {
         </p>
       </div>
       <PickingOptionSection />
-      {/* HOW ARE WE */}
-      <div className="text-center px-4 mb-8">
-        <h3 className="text-4xl font-bold">زورونا اليوم!</h3>
-        <p>leee3 - حيث الحلاوة تلتقي بالسعادة، والتميز هو عنواننا.</p>
-      </div>
       <ServiceSection />
+      <TestimonailSection />
       <ContactSection />
     </div>
   );

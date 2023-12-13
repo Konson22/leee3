@@ -1,14 +1,13 @@
-import { FaShoppingBag, FaTruckMoving } from "react-icons/fa";
-
 export default function PickingOptionSection() {
   return (
-    <div className="text-center px-4 mb-8">
-      <h3 className="text-2xl">طرق الاختيار الممتعة</h3>
-      <p>في leee3، نحن نفتخر بتقديم طرق اختيار ممتعة لتلبية احتياجاتكم:</p>
-      <div className="mt-7">
+    <div className="visit-use-section-container text-center md:px-[15%] px-14 md:py-20 py-14 mb-8">
+      <div className="text-white md:text-4xl text-2xl md:px-[10%] mb-8">
+        <p>في leee3، نحن نفتخر بتقديم طرق اختيار ممتعة لتلبية احتياجاتكم:</p>
+      </div>
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
         {deliveryData.map((option) => (
-          <div className="px-8 mb-5">
-            <div className="h-[100px] w-[100px] mx-auto my-0 bg-white p-3 rounded-full overflow-hidden">
+          <div className="bg-white p-10 mb-5">
+            <div className="md:h-[150px] h-[100px] border border-cl1 md:w-[150px] w-[100px] mx-auto my-0 bg-gra-100 p-3 rounded-full overflow-hidden">
               <img src={option.image} alt="" />
             </div>
             <h4 className="text-2xl font-bold">{option.title}</h4>

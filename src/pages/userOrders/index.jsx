@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useGlobalApi } from "../../manager/ContextProvider";
 import axiosInstance from "../../hooks/useAxios";
 import { FiX } from "react-icons/fi";
+import { LoaderSvg } from "../../components/Buttons";
 
 export default function UserOrders() {
   const { userOrders, setUserOrders } = useGlobalApi();
@@ -81,7 +82,7 @@ function OrderTableBody({ order, index, deleteOrder }) {
           className="w-[max-content] text-xl p-1 bg-red-400 text-white"
           onClick={handleDelete}
         >
-          <FiX />
+          {isLoading ? <LoaderSvg /> : <FiX />}
         </div>
       </td>
       <td className="p-2">{order.served ? " اتخذت" : "المعلقه"}</td>

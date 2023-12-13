@@ -8,9 +8,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { FiSearch, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import SearchBar from "../SearchBar";
+import { useGlobalApi } from "../../manager/ContextProvider";
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
+  const { showSearchBar, setShowSearchBar } = useGlobalApi();
   const toggleMenu = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -62,7 +65,9 @@ export default function MobileNav() {
         <Logo cName="" />
       </div>
       <div className="flex items-center">
-        <IconBox icon={<FiSearch />} cName="text-2xl mr-4" />
+        <span onClick={() => setShowSearchBar(!showSearchBar)}>
+          <IconBox icon={<FiSearch />} cName="text-2xl mr-4" />
+        </span>
         <NavCart />
         <ProfileIcon />
       </div>
@@ -108,6 +113,7 @@ export default function MobileNav() {
           </motion.div>
         )}
       </AnimatePresence>
+      {showSearchBar && <SearchBar />}
     </div>
   );
 }

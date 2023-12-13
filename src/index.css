@@ -43,15 +43,15 @@ img {
 
 
 .header-container {
-  background-image: linear-gradient(rgba(124, 89, 80, 0.5), rgba(124, 89, 80, 0.51)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url('./assets/images/pexels-meruyert-gonullu-6161672.jpg');
   background-size: cover;
   /* background-position: right; */
 }
 
 .header-text {
-  background-image: linear-gradient(rgba(124, 89, 80, 0.5), rgba(124, 89, 80, 0.51)),
-    url('./assets/images/conversation-hearts-4783767_640.jpg');
+  background-image: url('./assets/images/wave-1.svg');
+  background-image: linear-gradient(rgb(155, 112, 191), rgb(191, 112, 151));
   background-size: cover;
   background-position: right;
 }

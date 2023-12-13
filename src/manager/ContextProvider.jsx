@@ -14,6 +14,7 @@ export default function GlobalContextProvider({ children }) {
   const [message, setMessage] = useState("");
   const [candy, setCandy] = useState([]);
   const [userOrders, setUserOrders] = useState([]);
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   const savedCartItem = JSON.parse(localStorage.getItem("candy-cart"));
   const signOutUser = () => {
@@ -143,19 +144,22 @@ export default function GlobalContextProvider({ children }) {
       if (result) {
         respose = "تمت الإضافة مرة أخرى";
       }
-      const newCart = [...cartData, item];
+      const newCart = [...cartData, { ...item, id: generateCode() }];
       setCartData(newCart);
       saveToLocalStorage("candy-cart", newCart);
     } else {
       setCartData([item]);
-      localStorage.setItem("candy-cart", JSON.stringify([item]));
+      localStorage.setItem(
+        "candy-cart",
+        JSON.stringify([{ ...item, id: generateCode() }])
+      );
     }
     return respose;
   };
 
   // REMOVE ITEM FROM CART
   const removeItem = (id) => {
-    const result = savedCartItem.filter((item) => item.productID !== id);
+    const result = savedCartItem.filter((item) => item.id !== id);
     setCartData(result);
     if (result.length > 0) {
       saveToLocalStorage("candy-cart", result);
@@ -188,6 +192,8 @@ export default function GlobalContextProvider({ children }) {
     userOrders,
     showForm,
     isCheckingOut,
+    showSearchBar,
+    setShowSearchBar,
     setIsCheckingOut,
     setShowForm,
     signOutUser,
@@ -209,6 +215,9 @@ export const saveToLocalStorage = (name, data) => {
   localStorage.setItem(name, JSON.stringify(data));
 };
 
+function generateCode() {
+  return Math.floor(1000 + Math.random() * 9000);
+}
 // const saveReservationToLocalStorage = (data) => {
 //   localStorage.setItem("candy-cart", JSON.stringify(data));
 // };

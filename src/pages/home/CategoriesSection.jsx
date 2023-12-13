@@ -1,8 +1,8 @@
 import { useRef } from "react";
-import Carousel from "react-elastic-carousel";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { categories } from "../../assets/staticData";
+import Carousel from "react-elastic-carousel";
 
 const breakPoints = [
   { width: 0, itemsToShow: 2, itemPadding: [0, 3] },

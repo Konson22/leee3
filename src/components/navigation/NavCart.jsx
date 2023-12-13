@@ -63,7 +63,7 @@ export default function NavCart() {
                   >
                     <div
                       className="bg-red-400 text-white p-1 mr-3"
-                      onClick={() => removeItem(item.productID)}
+                      onClick={() => removeItem(item.id)}
                     >
                       <FiX />
                     </div>

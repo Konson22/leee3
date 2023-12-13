@@ -11,7 +11,7 @@ import { mobileNavigationLinks } from "../assets/staticData";
 
 export default function Footer() {
   return (
-    <footer className="footer text-white md:flex justify-between px-[8%] py-10">
+    <footer className="footer text-white md:flex justify-between md:px-[8%] px-4 py-10">
       <div className="">
         <div className="mb-7">
           <h3 className="text-xl text-right mb-3">الاشتراك</h3>
@@ -69,7 +69,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="">
+        <div className="flex-1">
           <h3 className="text-xl font-bold text-right">الاتصال والعنوان</h3>
           <ul>
             <li className="flex items-center justify-end my-2">

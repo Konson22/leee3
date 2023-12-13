@@ -7,7 +7,7 @@ export default function ProductSection() {
 
   return (
     <div className="md:px-[8%] px-4 my-8">
-      <h2 className="md:text-3xl text-xl text-cl1 font-bold text-center mb-7">
+      <h2 className="md:text-3xl text-xl text-cl1 font-bold text-center mb-4">
         تصفح مجموعتنا الواسعة
       </h2>
       <div className="grid md:grid-cols-4 grid-cols-2 md:gap-5 gap-2">
