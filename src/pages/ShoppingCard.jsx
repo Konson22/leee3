@@ -2,6 +2,7 @@ import { FiX } from "react-icons/fi";
 import { useGlobalApi } from "../manager/ContextProvider";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { LoaderSvg } from "../components/Buttons";
 
 export default function ShoppingCard() {
   const { cartData, removeItem, setIsCheckingOut } = useGlobalApi();
@@ -51,8 +52,8 @@ export default function ShoppingCard() {
         <div className="bg-white p-8">
           <p className="text-right">ليس لديك منتجات في عربة التسوق الخاصة بك</p>
           <div className="flex justify-end mt-8">
-            <Link className="px-4 py-2 border border-rd rounded" to="/store">
-              start shopping
+            <Link className="bg-cl1 text-white rounded px-4 py-2" to="/store">
+              ابدأ التسوق
             </Link>
           </div>
         </div>
@@ -95,15 +96,21 @@ function ItemsInCart({ cartData, removeItem, cName = "md:block hidden" }) {
 
 function TableBody({ item, removeItem, index }) {
   const [qty, setQty] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const handleDelete = async () => {
+    setIsLoading(true);
+    await removeItem(item.id);
+    setIsLoading(false);
+  };
   return (
     <tr key={index} className={`${index % 2 ? "bg-gray-50" : ""}`}>
       <td className="py-3 px-5">
         <div
           className="bg-rd text-white w-[max-content] cursor-pointer p-2"
-          onClick={() => removeItem(item.productID)}
+          onClick={handleDelete}
         >
-          <FiX />
+          {isLoading ? <LoaderSvg /> : <FiX />}
         </div>
       </td>
       <td className="py-3 px-5">{item.price * item.qty}</td>

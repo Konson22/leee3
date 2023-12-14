@@ -63,12 +63,6 @@ img {
   background-size: 100% 100%;
 }
 
-.visit-use-section-container {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('./assets/images/offer.jpg');
-  background-size: cover;
-  background-size: 100% 100%;
-}
 
 .login-container {
   background-image: linear-gradient(rgba(124, 89, 80, 0.2), rgba(124, 89, 80, 0.1)),
@@ -77,8 +71,14 @@ img {
   background-position: right;
 }
 
+.visit-use-section-container {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('./assets/images/offer.jpg');
+  background-size: cover;
+  background-size: 100% 100%;
+}
 
-.contact-from {
+.message-style {
   clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 60% 95%, 50% 100%, 40% 95%, 0 95%);
 }
 

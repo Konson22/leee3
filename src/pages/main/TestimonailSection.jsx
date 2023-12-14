@@ -47,7 +47,7 @@ export default function TestimonailSection() {
         >
           {testimonails.map((user) => (
             <div className="md:flex items-center bg-white rounded-md p-5">
-              <div className="h-[180px] md:w-[180px] contact-from">
+              <div className="h-[180px] md:w-[180px] message-style">
                 <img src={user.image} alt="" />
               </div>
               <div className="flex-1 text-center">

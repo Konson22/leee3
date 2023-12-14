@@ -110,7 +110,20 @@ export default function NavCart() {
               </div>
             </>
           ) : (
-            <div className="flex-1 p-7">No Items in you cart</div>
+            <div className="flex-1 p-7">
+              <p className="text-right">
+                ليس لديك منتجات في عربة التسوق الخاصة بك
+              </p>
+              <div className="flex justify-end mt-8">
+                <Link
+                  className="bg-cl1 text-white rounded px-4 py-2"
+                  to="/store"
+                  onClick={() => setIsOpen(false)}
+                >
+                  ابدأ التسوق
+                </Link>
+              </div>
+            </div>
           )}
         </div>
       </div>

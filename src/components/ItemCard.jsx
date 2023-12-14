@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useGlobalApi } from "../manager/ContextProvider";
-import { FiShoppingCart } from "react-icons/fi";
 
 export default function ItemCard({ item }) {
   const [val, setVal] = useState(1);
@@ -18,13 +17,23 @@ export default function ItemCard({ item }) {
     res && setMessage(res);
   };
 
+  message &&
+    setTimeout(() => {
+      setMessage("");
+    }, 4000);
+
   return (
     <div>
-      <div className="md:h-[150px] h-[150px] rounded overflow-hidden">
+      <div className="md:h-[150px] h-[150px] rounded overflow-hidden relative">
         <img
           src={`${process.env.REACT_APP_API}/${item.product_image}`}
           alt=""
         />
+        {message && (
+          <span className="absolute bottom-0 right-0 text-white bg-cl1/70 rounded-md p-3 text-sm mb-2 block">
+            {message}
+          </span>
+        )}
       </div>
       <div className="bg-white p-3">
         <p className="text-right line-clamp-2">
@@ -41,9 +50,6 @@ export default function ItemCard({ item }) {
             <span className="font-bold">{item.price}</span>
           </span>
         </div>
-        {message && (
-          <span className="text-rd p-3 text-sm mb-2 block">{message}</span>
-        )}
         <div className="flex items-center justify-between h-7">
           <div className="flex items-center">
             <div
@@ -67,7 +73,7 @@ export default function ItemCard({ item }) {
             onClick={handleAddItem}
           >
             <span>إضافة</span>
-            <FiShoppingCart />
+            {/* <FiShoppingCart /> */}
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ export default function MainPage() {
       </div>
       <ProductSection />
       {/* VISIT US SECTION */}
-      <div className="text-xl py-14 px-5 text-center mb-8">
+      <div className="message-style visit-use-section-container text-white -mb-6 text-xl py-14 px-5 text-center ">
         <p>
           في leee3، نفتخر بكوننا محطة الوجهة الأمثلة لعشاق الحلوى. نحن مكان يجمع
           بين التقاليد والابتكار، حيث يمكنكم الاستمتاع بأحدث صيحات عالم الحلوى

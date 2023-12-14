@@ -19,7 +19,7 @@ export default function ProductSection() {
       </div>
       <div className="flex justify-center mt-8">
         <Link className="bg-cl1 text-white rounded px-7 py-2" to="/store">
-          view all
+          المزيد
         </Link>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalApi } from "../manager/ContextProvider";
 import { useSearchParams } from "react-router-dom";
-import ProductCart from "../components/ProductCart";
 import { categories } from "../assets/staticData";
 import { FiChevronLeft, FiSearch } from "react-icons/fi";
 import ItemCard from "../components/ItemCard";
@@ -21,7 +20,6 @@ export default function ShopPage() {
       setQuery({ category: e });
     }
   };
-
   useEffect(() => {
     if (!query) {
       setData(candy);
@@ -41,16 +39,15 @@ export default function ShopPage() {
   return (
     <div className="md:px-[2%] px-2 md:mt-14 mt-3 flex">
       <div className="flex-1 md:mr-6">
-        <div className="md:hidden flex items-center justify-between bg-white/50 px-3 py-2 rounded border">
+        <div className="md:hidden flex items-center justify-between">
           {categories.map((category) => (
             <div
-              className="flex flex-col items-center justify-center"
+              className={`flex-1 flex justify-center rounded p-2 ${
+                category.name === query ? "border border-cl1/50" : ""
+              }`}
               key={category.name}
               onClick={() => handleCategory(category.name)}
             >
-              {/* <div className="h-12 w-12 border border-cl1 text-3xl text-cl1 rounded-full">
-                <img className="rounded-full" src={category.image} alt="" />
-              </div> */}
               {category.name}
             </div>
           ))}

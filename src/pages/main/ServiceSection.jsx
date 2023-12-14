@@ -1,18 +1,22 @@
+import { WhileInView } from "../../components/AnimateWhileInView";
+
 export default function ServiceSection() {
   return (
     <div className="px-14 mb-8">
       <h3 className="text-4xl text-center">ميزاتنا</h3>
       <div className="mt-7">
         {data.map((option) => (
-          <div className="bg-white md:flex px-8 py-2 my-14">
-            <div className="h-24 w-24 mx-auto -mt-10 border-8 border-gray-100 bg-white p-4 rounded-md overflow-hidden">
-              <img src={option.image} alt="" />
+          <WhileInView>
+            <div className="bg-white md:flex px-8 py-2 rounded-xl shadow-md my-14">
+              <div className="h-24 w-24 rotate-45 mx-auto -mt-10 border-8 border-gray-100 bg-white p-4 rounded-md overflow-hidden">
+                <img className="-rotate-45" src={option.image} alt="" />
+              </div>
+              <div className="flex-1 text-center p-6">
+                <h4 className="text-xl font-bold">{option.title}</h4>
+                <p>{option.text}</p>
+              </div>
             </div>
-            <div className="flex-1 text-center p-6">
-              <h4 className="text-xl font-bold">{option.title}</h4>
-              <p>{option.text}</p>
-            </div>
-          </div>
+          </WhileInView>
         ))}
       </div>
     </div>
