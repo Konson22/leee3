@@ -49,10 +49,10 @@ export function Time(t){
     let text;
     dif = diffDates(romanianRevolution, present, "minutes")
     if(dif < 60){
-        text = `${diffDates(romanianRevolution, present, "minutes")} شكرا طلبك سيكون جاهزا`
+        text = `عزيزي العميل سيكون طلبك جاهزا خلال ${diffDates(romanianRevolution, present, "minutes")} دقيقة`
             
     }else{
-        text = `${diffDates(romanianRevolution, present, "hours")} شكرا طلبك سيكون جاهزا`
+        text = ` عزيزي العميل سيكون طلبك جاهزا خلال ${diffDates(romanianRevolution, present, "hours")} ساعة`
     }
     return text
 }
