@@ -4,7 +4,7 @@ import { useGlobalApi } from "../../manager/ContextProvider";
 import { Link } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ProfileIcon({ cName }) {
   const { profile, setShowForm, userOrders, signOutUser } = useGlobalApi();
@@ -12,10 +12,23 @@ export default function ProfileIcon({ cName }) {
 
   const toggleProfile = () =>
     profile ? setIsOpen(!isOpen) : setShowForm("login");
+
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+  }, []);
+
+  const handleClickOutside = (e) => {
+    if (elementRef.current && !elementRef.current.contains(e.target)) {
+      setIsOpen(false);
+    }
+  };
   return (
     <div
       className="relative flex items-center cursor-pointer text-gray-600 md:ml-0 ml-5"
       onClick={toggleProfile}
+      ref={elementRef}
     >
       <IconBox icon={<FiUser />} count={userOrders.length} cName={cName} />
       <div className="md:flex hidden items-center text-white text-sm">

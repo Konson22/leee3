@@ -1,7 +1,7 @@
 import { FiChevronDown } from "react-icons/fi";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import { categories } from "../assets/staticData";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useGlobalApi } from "../manager/ContextProvider";
 
@@ -31,8 +31,18 @@ const menuVars = {
 };
 export default function SearchBar() {
   const { setShowSearchBar } = useGlobalApi();
-
   const [showCategory, setShowCategory] = useState(false);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+  }, []);
+
+  const handleClickOutside = (e) => {
+    if (elementRef.current && !elementRef.current.contains(e.target)) {
+      setShowCategory(false);
+    }
+  };
   return (
     <AnimatePresence>
       <motion.div
@@ -45,6 +55,7 @@ export default function SearchBar() {
         <div
           className="bg-white flex items-center px-3 mr-2 relative"
           onClick={() => setShowCategory(!showCategory)}
+          ref={elementRef}
         >
           <span className="">
             <FiChevronDown />

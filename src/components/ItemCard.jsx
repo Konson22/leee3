@@ -15,6 +15,7 @@ export default function ItemCard({ item }) {
       product_image: item.product_image,
     });
     res && setMessage(res);
+    setVal(1);
   };
 
   message &&
@@ -36,18 +37,18 @@ export default function ItemCard({ item }) {
         )}
       </div>
       <div className="bg-white p-3">
-        <p className="text-right line-clamp-2">
+        <p className="text-right line-clamp-1">
           قائمتنا مليئة بالكعك الطازج، من الكعك الكلاسيكي إلى الإبداعات الفريدة
           التي تناسب جميع الأذواق. يتم اختيار
         </p>
         <div className="flex justify-between">
           <span className="flex items-center justify-end mb-3">
-            <span className="font-bold">{item.quantity}5</span>
+            <span className="font-bold mr-2">{item.quantity}5</span>
             <span> متبقية</span>
           </span>
           <span className="flex items-center justify-end mb-3">
             <span>ر.س</span>
-            <span className="font-bold">{item.price}</span>
+            <span className="font-bold ml-1">{item.price}</span>
           </span>
         </div>
         <div className="flex items-center justify-between h-7">

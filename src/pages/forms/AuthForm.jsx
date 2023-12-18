@@ -2,13 +2,25 @@ import Login from "./Login";
 import Register from "./Register";
 import { useGlobalApi } from "../../manager/ContextProvider";
 import { FiX } from "react-icons/fi";
+import { useEffect, useRef } from "react";
 
 export default function AuthForm() {
   const { showForm, setShowForm } = useGlobalApi();
+  const elementRef = useRef(null);
 
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleClickOutside = (e) => {
+    if (elementRef.current && !elementRef.current.contains(e.target)) {
+      setShowForm(null);
+    }
+  };
   return (
     <div className="h-[dvh] fixed inset-0 bg-cl5/40 backdrop-blur-md z-50 flex items-center justify-center">
-      <div className="md:w-[35%] w-[85%] bg-white relative">
+      <div className="md:w-[35%] w-[85%] bg-white relative" ref={elementRef}>
         <div
           className="border border-red-500 bg-white rounded-full absolute -right-1 -top-8 p-2 md:text-xl z-50"
           onClick={() => setShowForm(null)}

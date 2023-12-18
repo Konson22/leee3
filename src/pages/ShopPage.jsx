@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useGlobalApi } from "../manager/ContextProvider";
 import { useSearchParams } from "react-router-dom";
 import { categories } from "../assets/staticData";
-import { FiChevronLeft, FiSearch } from "react-icons/fi";
+import { FiChevronLeft, FiFilter, FiSearch } from "react-icons/fi";
 import ItemCard from "../components/ItemCard";
+import { ItemsLoader } from "../components/Loaders";
 
 export default function ShopPage() {
   const { isLoading, candy } = useGlobalApi();
@@ -39,10 +40,10 @@ export default function ShopPage() {
   return (
     <div className="md:px-[2%] px-2 md:mt-14 mt-3 flex">
       <div className="flex-1 md:mr-6">
-        <div className="md:hidden flex items-center justify-between">
+        <div className="md:hidden flex items-center justify-end">
           {categories.map((category) => (
             <div
-              className={`flex-1 flex justify-center rounded p-2 ${
+              className={`flex justify-center rounded p-2 ${
                 category.name === query ? "border border-cl1/50" : ""
               }`}
               key={category.name}
@@ -53,7 +54,10 @@ export default function ShopPage() {
           ))}
         </div>
         <div className="flex items-center justify-between my-4">
-          <span>فرز حسب</span>
+          <div className="flex items-center">
+            <FiFilter />
+            <span>فرز حسب</span>
+          </div>
           <div className="flex items-center justify-end">
             <span>{query && query}</span>
             <FiChevronLeft />
@@ -61,7 +65,7 @@ export default function ShopPage() {
           </div>
         </div>
         <div className="grid md:grid-cols-4 grid-cols-2 md:gap-5 gap-2">
-          {isLoading && <div className="">Loading...</div>}
+          {isLoading && [...new Array(12)].map(() => <ItemsLoader />)}
           {data.length > 0 &&
             !message &&
             data.map((item) => <ItemCard item={item} key={item.productID} />)}

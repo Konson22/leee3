@@ -1,13 +1,14 @@
 import { FiShoppingBag, FiX } from "react-icons/fi";
 import IconBox from "./IconBox";
 import { useGlobalApi } from "../../manager/ContextProvider";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function NavCart() {
   const [totalPrice, setTotalPrice] = useState(0.0);
   const [isOpen, setIsOpen] = useState(false);
   const { cartData, removeItem, setIsCheckingOut } = useGlobalApi();
+  const elementRef = useRef(null);
 
   useEffect(() => {
     if (cartData.length) {
@@ -22,6 +23,16 @@ export default function NavCart() {
     e.stopPropagation();
     setIsOpen(false);
     setIsCheckingOut(true);
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+  }, []);
+
+  const handleClickOutside = (e) => {
+    if (elementRef.current && !elementRef.current.contains(e.target)) {
+      setIsOpen(false);
+    }
   };
   return (
     <div className="flex items-center relative md:border md:border-cl1 md:bg-cl1/20 cursor-pointer md:py-2 md:px-5 rounded-md mx-4">
@@ -46,7 +57,10 @@ export default function NavCart() {
             : "translate-x-0"
         } duration-500 md:absolute fixed md:h-auto h-[100dvh] z-50 left-0 md:w-auto w-full md:top-full top-0 bg-black/50`}
       >
-        <div className="md:w-[350px] w-[80%] h-full flex flex-col bg-white shadow-md border rounded">
+        <div
+          className="md:w-[350px] w-[80%] h-full flex flex-col bg-white shadow-md border rounded"
+          ref={elementRef}
+        >
           <div className="bg-gray-100 flex items-center justify-between px-4 py-3">
             <div className="" onClick={() => setIsOpen(false)}>
               <FiX />
@@ -55,14 +69,58 @@ export default function NavCart() {
           </div>
           {cartData.length > 0 ? (
             <>
-              <div className="flex-1 overflow-y-scroll">
-                {cartData.map((item, index) => (
+              <div className="flex-1 overflow-y-scroll p-3">
+                <table className="table-auto w-full text-right">
+                  <thead>
+                    <tr>
+                      <th className="text-left"></th>
+                      <th>السعر</th>
+                      <th>الكمية</th>
+                      <th colSpan={2}>منتجات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cartData.map((item, index) => (
+                      <tr
+                        className={index % 2 ? "" : "bg-gray-200"}
+                        key={index}
+                      >
+                        <td
+                          className="text-red-400 pl-2"
+                          onClick={() => removeItem(item.productID)}
+                        >
+                          <FiX />
+                        </td>
+                        <td>
+                          <div className="flex items-center justify-end">
+                            <p>ر.س</p>
+                            <p>{item.price}</p>
+                          </div>
+                        </td>
+                        <td>x{item.qty}</td>
+                        <td>
+                          <div className="flex items-center justify-end">
+                            <span>{item.name}</span>
+                            <img
+                              className="h-10 w-10"
+                              src={
+                                process.env.REACT_APP_API + item.product_image
+                              }
+                              alt=""
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {/* {cartData.map((item, index) => (
                   <div
                     className="flex items-center border-b border-cl1 px-2 py-4"
                     key={index}
                   >
                     <div
-                      className="bg-red-400 text-white p-1 mr-3"
+                      className="text-red-400 mr-3"
                       onClick={() => removeItem(item.id)}
                     >
                       <FiX />
@@ -81,7 +139,7 @@ export default function NavCart() {
                       alt=""
                     />
                   </div>
-                ))}
+                ))} */}
               </div>
               <div className="border-t-2 border-gray-200 px-4 py-3">
                 <div className="flex justify-between font-bold">

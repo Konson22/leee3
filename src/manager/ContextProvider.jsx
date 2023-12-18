@@ -140,26 +140,32 @@ export default function GlobalContextProvider({ children }) {
   const addItemToCart = (item) => {
     let respose = null;
     if (cartData.length > 0) {
-      const result = cartData.find((i) => i.productID === item.productID);
-      if (result) {
+      const target = cartData.find((i) => i.productID === item.productID);
+      const filteredData = cartData.filter(
+        (i) => i.productID !== item.productID
+      );
+      if (target) {
+        const modifedData = { ...target, qty: item.qty + target.qty };
+        const newItems = [...filteredData, modifedData];
+        console.log(newItems);
+        setCartData(newItems);
+        saveToLocalStorage("candy-cart", newItems);
         respose = "تمت الإضافة مرة أخرى";
+      } else {
+        const newCart = [...cartData, item];
+        setCartData(newCart);
+        saveToLocalStorage("candy-cart", newCart);
       }
-      const newCart = [...cartData, { ...item, id: generateCode() }];
-      setCartData(newCart);
-      saveToLocalStorage("candy-cart", newCart);
     } else {
       setCartData([item]);
-      localStorage.setItem(
-        "candy-cart",
-        JSON.stringify([{ ...item, id: generateCode() }])
-      );
+      localStorage.setItem("candy-cart", JSON.stringify([item]));
     }
     return respose;
   };
 
   // REMOVE ITEM FROM CART
   const removeItem = (id) => {
-    const result = savedCartItem.filter((item) => item.id !== id);
+    const result = savedCartItem.filter((item) => item.productID !== id);
     setCartData(result);
     if (result.length > 0) {
       saveToLocalStorage("candy-cart", result);
@@ -215,9 +221,9 @@ export const saveToLocalStorage = (name, data) => {
   localStorage.setItem(name, JSON.stringify(data));
 };
 
-function generateCode() {
-  return Math.floor(1000 + Math.random() * 9000);
-}
+// function generateCode() {
+//   return Math.floor(1000 + Math.random() * 9000);
+// }
 // const saveReservationToLocalStorage = (data) => {
 //   localStorage.setItem("candy-cart", JSON.stringify(data));
 // };

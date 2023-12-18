@@ -5,7 +5,7 @@ import { mobileNavigationLinks } from "../assets/staticData";
 export default function Footer() {
   return (
     <footer className="footer text-white md:flex justify-between md:px-[8%] px-4 py-10">
-      <div className="">
+      {/* <div className="">
         <h3 className="text-xl text-right mb-3">الاشتراك</h3>
         <div className="h-[3rem] flex p-1 rounded bg-white">
           <button className="h-full flex items-center bg-rd text-white rounded px-4">
@@ -21,12 +21,14 @@ export default function Footer() {
         <p className="text-right mt-2">
           اشترك واحصل على تحديث المثيل حول منتجاتنا وعروضنا الخاصة
         </p>
-      </div>
+      </div> */}
       <div className="md:my-0 my-6">
         <h3 className="text-xl text-right">روابط سريعة</h3>
         <ul>
-          {mobileNavigationLinks.map((link) => (
-            <li className="text-right py-2">{link.text}</li>
+          {mobileNavigationLinks.map((link, index) => (
+            <li className="text-right py-2" key={index}>
+              {link.text}
+            </li>
           ))}
         </ul>
       </div>

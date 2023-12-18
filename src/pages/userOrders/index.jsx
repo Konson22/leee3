@@ -35,7 +35,7 @@ export default function UserOrders() {
         <table className="border bg-white table-auto w-full text-right">
           <thead className="bg-gray-200">
             <tr>
-              <th className="px-2 py-3 text-left">x</th>
+              <th className="px-2 py-3 text-left">حذف</th>
               <th className="px-2 py-3">حالة</th>
               <th className="px-2 py-3">السعر</th>
               <th className="px-2 py-3">عدد المنتجات</th>
@@ -79,7 +79,7 @@ function OrderTableBody({ order, index, deleteOrder }) {
     <tr className={index % 2 ? "bg-gray-200" : ""}>
       <td className="p-2">
         <div
-          className="w-[max-content] text-xl p-1 bg-red-400 text-white"
+          className="w-[max-content] text-xl p-1 text-red-400"
           onClick={handleDelete}
         >
           {isLoading ? <LoaderSvg /> : <FiX />}
